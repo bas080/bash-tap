@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+# only source when in bash (sh compatibility)
+[ ! -z ${BASH_VERSION:-} ] && {
+  set -o pipefail
+}
+
+alias success="test_success"
+alias failure="test_failure"
+
+plan() {
+  printf '1..%s\n' "$1"
+}
+
+diagnostics() {
+  xargs -d '\n' printf '# %s\n'
+}
+
+skip() {
+  ok "# skip $@"
+}
+
+skip_all() {
+  printf '1..0 # skip %s\n' "$1"
+}
+
+bail() {
+  printf 'Bail out! %s\n' "$1"
+}
+
+test_success() {
+  test $? -eq 0 \
+    && printf 'ok - %b\n' "$1" \
+    || printf 'not ok - %b\n' "${2-$1}"
+}
+
+test_failure() {
+  test $? -ne 0
+  test_success "$@"
+}
+
+ok() {
+  printf 'ok - %b\n' "$1"
+}
+
+not_ok() {
+  printf 'not %b' "$(ok "$@")"
+}
