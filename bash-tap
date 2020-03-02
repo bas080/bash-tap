@@ -22,6 +22,10 @@ skip_all() {
   printf '1..0 # skip %s\n' "$1"
 }
 
+todo() {
+  not_ok "# TODO $@"
+}
+
 bail() {
   printf 'Bail out! %s\n' "$1"
 }
