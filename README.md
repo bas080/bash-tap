@@ -213,6 +213,13 @@ This README.md is generated using the [./README](./README) script.
 Tests are located in prove's default ./t directory. You can run the tests
 indivudually by simply executing them; or by using the prove command.
 
+## Roadmap
+
+- Start a [Wiki repository][1] for this project containing usefull bash tests
+  for managing projects.
+
 ## License
 
 GNU General Public License 3.0
+
+[1]: https://github.com/bas080/bash-tap.wiki.git
