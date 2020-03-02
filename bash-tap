@@ -13,6 +13,8 @@
   set -o pipefail
 }
 
+trap '[ ! -z ${NOT_OK:-} ] && exit 1' 0
+
 plan() {
   printf '1..%s\n' "$1"
 }
@@ -30,7 +32,7 @@ skip_all() {
 }
 
 todo() {
-  not_ok "# TODO $@"
+  printf 'not ok - # TODO %b\n' "$@"
 }
 
 bail() {
@@ -39,8 +41,8 @@ bail() {
 
 test_success() {
   test $? -eq 0 \
-    && printf 'ok - %b\n' "$1" \
-    || printf 'not ok - %b\n' "${2-$1}"
+    && ok "$@" \
+    || not_ok "$@"
 }
 
 test_failure() {
@@ -53,6 +55,7 @@ ok() {
 }
 
 not_ok() {
+  NOT_OK=1
   printf 'not %b\n' "$(ok "$@")"
 }
 

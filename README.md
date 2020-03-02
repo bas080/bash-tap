@@ -54,6 +54,13 @@ test_success "Can run all tests with sh."
 # ok - The test_success alias success works.
 # ok - The test_failure alias failure works.
 # 1..2
+# # 1..1
+# # not ok - This not ok will cause the process to fail.
+# not ok - The process failed because of a not ok. (not_ok)
+# # 1..1
+# # not ok - This not ok will cause the process to fail.
+# not ok - The process failed because of a not ok. (test_failure)
+# 1..2
 # ok - Just pass the thing
 # ok - Exit code is a success
 # 1..1
@@ -67,6 +74,40 @@ test_success "Can run all tests with sh."
 # not ok - # TODO This
 # not ok - # TODO That
 ok - Can run all tests with sh.
+```
+
+### ./t/example.not_ok_causes_failure.t
+
+```bash
+#!/usr/bin/env bash
+
+source ./bash-tap
+
+plan 2
+
+(
+  source ./bash-tap
+  plan 1
+  not_ok "This not ok will cause the process to fail."
+) | diagnostics
+test_failure "The process failed because of a not ok. (not_ok)"
+
+(
+  source ./bash-tap
+  plan 1
+  test_failure "This not ok will cause the process to fail."
+) | diagnostics
+test_failure "The process failed because of a not ok. (test_failure)"
+```
+
+```tap
+1..2
+# 1..1
+# not ok - This not ok will cause the process to fail.
+ok - The process failed because of a not ok. (not_ok)
+# 1..1
+# not ok - This not ok will cause the process to fail.
+ok - The process failed because of a not ok. (test_failure)
 ```
 
 ### ./t/example.ok.t
