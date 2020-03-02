@@ -42,7 +42,7 @@ ok() {
 }
 
 not_ok() {
-  printf 'not %b' "$(ok "$@")"
+  printf 'not %b\n' "$(ok "$@")"
 }
 
 # aliases
