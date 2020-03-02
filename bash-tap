@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
-# only source when in bash (sh compatibility)
+# Only set runtime parameters when running in Bash. (Dash compatibility)
 [ ! -z ${BASH_VERSION:-} ] && {
+  # This makes pipelines fail. A sensible default if you ask me.
   set -o pipefail
 }
-
-alias success="test_success"
-alias failure="test_failure"
 
 plan() {
   printf '1..%s\n' "$1"
@@ -46,3 +44,8 @@ ok() {
 not_ok() {
   printf 'not %b' "$(ok "$@")"
 }
+
+# aliases
+
+success() { test_success "$@"; }
+failure() { test_failure "$@"; }
