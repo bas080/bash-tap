@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+# # # # # # #
+# author:  Bas Huis
+# github:  https://github.com/bas080/bash-tap
+# created: Mon Mar  2 20:50:37 CET 2020
+# license: GNU General Public License 3.0
+# # # #
+
+set -o pipefail
+
+examples() {
+  for file in ./t/example.*.t; do
+cat <<EOF
+### $file
+
+\`\`\`bash
+$(cat "$file")
+\`\`\`
+
+\`\`\`tap
+$("$file")
+\`\`\`
+
+EOF
+  done
+}
+
+chmod =w ./README.md
+tee ./README.md <<EOF
+# Bash Tap
+
+Minimal tap utilities for (ba)sh scripts.
+
+## Examples
+
+$(examples)
+
+## Documentation
+
+This README.md is generated using the [./README](./README) script.
+
+## Tests
+
+Tests are located in prove's default ./t directory. You can run the tests
+indivudually by simply executing them; or by using the prove command.
+
+## License
+
+GNU General Public License 3.0
+EOF
+chmod =r ./README.md
