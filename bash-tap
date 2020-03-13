@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
-# # # # # # #
 # author:  Bas Huis
-# github:  https://github.com/bas080/bash-tap
-# created: Mon Mar  2 20:08:39 CET 2020
+# website: https://github.com/bas080
+# created: Fri Mar 13 02:36:04 CET 2020
+# changed: Mon Mar  2 22:19:26 CET 2020
 # license: GNU General Public License 3.0
-# # # #
 
 # Only set runtime parameters when running in Bash. (Dash compatibility)
 [ ! -z ${BASH_VERSION:-} ] && {
