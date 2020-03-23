@@ -4,6 +4,6 @@ source ./bash-tap
 
 plan 1
 
-ls | xargs not-a-command 2>&1 | diagnostics
+find . -print0 | xargs not-a-command 2>&1 | diagnostics
 
 test_failure "Should fail because not-a-command is not an existant command."

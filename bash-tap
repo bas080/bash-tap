@@ -7,15 +7,23 @@
 # license: GNU General Public License 3.0
 
 # Only set runtime parameters when running in Bash. (Dash compatibility)
-[ ! -z ${BASH_VERSION:-} ] && {
+[ ! -z "${BASH_VERSION:-}" ] && {
   # This makes pipelines fail. A sensible default if you ask me.
   set -o pipefail
 }
 
-trap '[ ! -z ${NOT_OK:-} ] && exit 1' 0
+trap on_exit EXIT
+
+on_exit() {
+  [ ! -z "${NOT_OK:-}" ] && exit 1
+}
 
 plan() {
-  printf '1..%s\n' "$1"
+  if [ -z "${1:-}" ]; then
+    plan "$TEST_COUNT"
+  else
+    printf '1..%s\n' "$1"
+  fi
 }
 
 diagnostics() {
@@ -23,7 +31,7 @@ diagnostics() {
 }
 
 skip() {
-  ok "# skip $@"
+  ok "# skip $1"
 }
 
 skip_all() {
@@ -39,9 +47,12 @@ bail() {
 }
 
 test_success() {
-  test $? -eq 0 \
-    && ok "$@" \
-    || not_ok "$@"
+  # shellcheck disable=SC2181
+  if [ $? -eq 0 ]; then
+    ok "$@"
+  else
+    not_ok "$@"
+  fi
 }
 
 test_failure() {
@@ -50,12 +61,15 @@ test_failure() {
 }
 
 ok() {
-  printf 'ok - %b\n' "$1"
+  TEST_COUNT=$((TEST_COUNT+1))
+
+  # shellcheck disable=SC2059
+  printf 'ok - %s\n' "$(printf "$@")"
 }
 
 not_ok() {
   NOT_OK=1
-  printf 'not %b\n' "$(ok "$@")"
+  printf 'not %s' "$(ok "$@")"
 }
 
 # aliases
