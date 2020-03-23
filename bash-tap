@@ -8,14 +8,21 @@
 
 # Only set runtime parameters when running in Bash. (Dash compatibility)
 [ ! -z "${BASH_VERSION:-}" ] && {
-  # This makes pipelines fail. A sensible default if you ask me.
   set -o pipefail
+}
+
+on_exit() {
+  [ ! -z "${NOT_OK:-}" ] && exit 1
 }
 
 trap on_exit EXIT
 
-on_exit() {
-  [ ! -z "${NOT_OK:-}" ] && exit 1
+script_success() {
+  [ -z "${BASH_TAP_SCRIPT_MODE:-}" ] || return 0
+  plan 1
+  BASH_TAP_SCRIPT_MODE=1 eval "$0" "$@" | diagnostics
+  test_success "Script $0 ran successfuly."
+  exit $?
 }
 
 plan() {

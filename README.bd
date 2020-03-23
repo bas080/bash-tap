@@ -6,31 +6,36 @@ Minimal tap utilities for (ba)sh scripts.
 
 ## Examples
 
-Bash tap is tested with it's own testing utilities. These tests also functtion
-as examples on how to use bash tap. The tests are located in the `./t/` directory.
+Bash tap is tested with its own testing utilities. These tests also function
+as examples on how to use bash tap. The tests are located in the `./t/`
+directory.
 
 The following is an example of a test where it isn't clear how many tests will
 be run. It possible to have bash tap append the plan at the end of the test
 run.
 
-$ cat ./t/example.append-plan.t
+`$ cat ./t/example.append-plan.t`
 
-$ ./t/example.append-plan.t
+`$ ./t/example.append-plan.t`
 
 See the `./t/` directory for more examples.
+
+A test that will output tap based on the exit code.
+
+`$ ./t/example.process.t`
 
 ## Documentation
 
 The ./README.md is generated using [barkdown][2]. To regenerate simply run
-`$ ./README.bd > README.md`.
+ `$ ./README.bd > README.md`.
 
 ## Tests
 
 Tests are located in prove's default ./t directory. This is how to run them:
 
-$ prove # runs all tests
+`$ prove # runs all tests`
 
-$ ./t/example.aliases.t # runs a single test
+`$ ./t/example.aliases.t # runs a single test`
 
 ## License
 

@@ -4,8 +4,9 @@ Minimal tap utilities for (ba)sh scripts.
 
 ## Examples
 
-Bash tap is tested with it's own testing utilities. These tests also functtion
-as examples on how to use bash tap. The tests are located in the `./t/` directory.
+Bash tap is tested with its own testing utilities. These tests also function
+as examples on how to use bash tap. The tests are located in the `./t/`
+directory.
 
 The following is an example of a test where it isn't clear how many tests will
 be run. It possible to have bash tap append the plan at the end of the test
@@ -32,10 +33,19 @@ ok - Two
 
 See the `./t/` directory for more examples.
 
+A test that will output tap based on the exit code.
+
+```
+$ ./t/example.process.t
+1..1
+# hello world
+ok - Script ./t/example.process.t ran successfuly.
+```
+
 ## Documentation
 
 The ./README.md is generated using [barkdown][2]. To regenerate simply run
-`$ ./README.bd > README.md`.
+ `$ ./README.bd > README.md`.
 
 ## Tests
 
@@ -49,11 +59,12 @@ t/example.dash.t ................... ok
 t/example.not_ok_causes_failure.t .. ok
 t/example.ok.t ..................... ok
 t/example.pipefail.t ............... ok
+t/example.process.t ................ ok
 t/example.skip-all.t ............... skipped: Because that was the intention.
 t/example.skip.t ................... ok
 t/example.todo.t ................... ok
 All tests successful.
-Files=9, Tests=14,  1 wallclock secs ( 0.04 usr  0.00 sys +  0.07 cusr  0.02 csys =  0.13 CPU)
+Files=10, Tests=15,  0 wallclock secs ( 0.05 usr  0.01 sys +  0.10 cusr  0.05 csys =  0.21 CPU)
 Result: PASS
 ```
 
