@@ -1,9 +1,10 @@
+version 0.0.0
 linked xargs
 linked printf
 linked bash
-linked bash-tap "$PWD/bash-tap"
 
 # dev
 linked sh
 linked cat
 linked find
+linked bash-tap "$PWD/bash-tap"

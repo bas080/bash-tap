@@ -76,7 +76,7 @@ ok() {
 
 not_ok() {
   NOT_OK=1
-  printf 'not %s' "$(ok "$@")"
+  printf 'not %s\n' "$(ok "$@")"
 }
 
 # aliases
