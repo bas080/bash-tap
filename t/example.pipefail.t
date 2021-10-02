@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source ./bash-tap
+source bash-tap
 
 plan 1
 
