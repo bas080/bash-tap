@@ -7,4 +7,5 @@ linked bash
 linked sh
 linked cat
 linked find
+linked prove
 linked bash-tap "$PWD/bash-tap"

@@ -50,6 +50,7 @@ todo() {
 }
 
 bail() {
+  NOT_OK=1
   printf 'Bail out! %s\n' "$1"
 }
 

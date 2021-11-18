@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+file_path="./t/$1"
+
+{
+  echo '#!/usr/bin/env bash'
+  echo 'source bash-tap'
+  cat -
+} > "$file_path"
+
+chmod +x "$file_path"
+
+prove -v "$file_path" 1>&2
+
+"$file_path"
