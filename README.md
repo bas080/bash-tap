@@ -42,12 +42,16 @@ as examples on how to use bash tap.
 TAP tests are required to have a plan defined. Otherwise it is not considered
 a valid test run. Here is an example of a test run with 0 assertions.
 
+### Plan
+
 ```bash ./test plan.t
 plan 0
 ```
 ```
 1..0
 ```
+
+### Ok
 
 The ok function simply prints out an TAP ok line.
 
@@ -64,6 +68,8 @@ Sometimes you don't know how many tests will be run. For those cases it is
 possible to have bash-tap append the plan to the TAP output after all
 assertions have been run.
 
+### Append Plan
+
 ```bash ./test append-plan.t
 ok "First ok."
 ok "Second ok."
@@ -77,6 +83,8 @@ ok - Third ok.
 1..3
 ```
 
+### Todo
+
 While maintaining the test suite it might be nice to define a todo so you don't
 forget to test a certain case.
 
@@ -88,6 +96,8 @@ todo "A todo."
 1..1
 not ok - # TODO A todo.
 ```
+
+## Not Ok
 
 The `not_ok` function simply prints out not ok TAP line.
 
@@ -109,6 +119,8 @@ not ok - Is not ok.
 1
 ```
 
+### Success
+
 Because we are using bash and working with exit codes, it is nice to have a few
 helpers to make working with bash nicer.
 
@@ -121,6 +133,8 @@ true; success "Previous command had a zero exit code."
 ok - Previous command had a zero exit code.
 ```
 
+### Failure
+
 ```bash ./test failure.t
 plan 1
 false; failure "Previous command had a non zero exit code."
@@ -129,6 +143,8 @@ false; failure "Previous command had a non zero exit code."
 1..1
 ok - Previous command had a non zero exit code.
 ```
+
+### Diagnostics
 
 Because the TAP output is written to stdout; we do not want to polute the
 stdout with the output of other programs. In case you are interested in the
@@ -146,6 +162,8 @@ success "Previous command had a zero exit code."
 ok - Previous command had a zero exit code.
 ```
 
+### Skip
+
 Skip is great to make sure that the planned test count is still what we expect
 yet it allows us to communicate that certain tests were not run.
 
@@ -160,6 +178,8 @@ ok - # skip No need to test this.
 ok - Is run and is ok.
 ```
 
+## Skip all
+
 Certain cases we accept that a test does not continue but also doesn't cause
 a test failure. We use `skip_all` for those cases. Make sure to not have defined any
 other output. A `skip_all` is most likely to occur at the top of the file before
@@ -172,6 +192,8 @@ skip_all "Because that was the intention."
 ```
 1..0 # skip Because that was the intention.
 ```
+
+### Bail
 
 Sometimes you want the complete test suite to fail when something happens.
 For that we use `bail`.
@@ -219,6 +241,8 @@ not ok - Reaches this but ignores it.
 1
 ```
 
+### Failing pipelines
+
 When using pipes in bash, we have to make sure that if one of the processes in
 that pipeline fails, the whole pipeline also returns a non zero exit code. We
 use the `set -o pipefail` for that. bash-tap will do this for you when sourcing
@@ -234,6 +258,8 @@ failure "Should fail because not-a-command is not an existant command."
 # xargs: not-a-command: No such file or directory
 ok - Should fail because not-a-command is not an existant command.
 ```
+
+### Dash
 
 Besides bash you can also use bash-tap in dash. Dash does not have `source`
 feature and therefore we have to `cat` to perform the tests. We'll run all
@@ -259,28 +285,17 @@ not ok - # TODO Make sure only tests that dash can support are run. (hardcode?)
 ok - Can run ./t/append-plan.t.
 not ok - Can run ./t/bail.t.
 ok - Can run ./t/diagnostics.t.
-ok - Can run ./t/example.aliases.t.
-ok - Can run ./t/example.append-plan.t.
-not ok - Can run ./t/example.bail.t.
-not ok - Can run ./t/example.not_ok_causes_failure.t.
-ok - Can run ./t/example.ok.t.
-not ok - Can run ./t/example.pipefail.t.
-ok - Can run ./t/example.process.t.
-ok - Can run ./t/example.skip-all.t.
-ok - Can run ./t/example.skip.t.
-ok - Can run ./t/example.todo.t.
 ok - Can run ./t/failure.t.
 ok - Can run ./t/ok.t.
 not ok - Can run ./t/pipefail.t.
 ok - Can run ./t/plan.t.
-ok - Can run ./t/script-success.t.
 ok - Can run ./t/skip-all.t.
 ok - Can run ./t/skip.t.
 ok - Can run ./t/source-using-path-variable.t.
 ok - Can run ./t/source-using-relative-path.t.
 ok - Can run ./t/success.t.
 ok - Can run ./t/todo.t.
-1..19
+1..11
 ```
 
 ### Script Success
@@ -324,32 +339,22 @@ them:
 prove
 ```
 ```
-t/append-plan.t .................... ok
-t/bail.t ........................... ok
-t/diagnostics.t .................... ok
-t/example.aliases.t ................ ok
-t/example.append-plan.t ............ ok
-t/example.bail.t ................... ok
-t/example.not_ok_causes_failure.t .. ok
-t/example.ok.t ..................... ok
-t/example.pipefail.t ............... ok
-t/example.process.t ................ ok
-t/example.skip-all.t ............... skipped: Because that was the intention.
-t/example.skip.t ................... ok
-t/example.todo.t ................... ok
-t/failure.t ........................ ok
-t/ok.t ............................. ok
-t/pipefail.t ....................... ok
-t/plan.t ........................... skipped: (no reason given)
-t/script-success.t ................. ok
-t/skip-all.t ....................... skipped: Because that was the intention.
-t/skip.t ........................... ok
-t/source-using-path-variable.t ..... ok
-t/source-using-relative-path.t ..... ok
-t/success.t ........................ ok
-t/todo.t ........................... ok
+t/append-plan.t ................. ok
+t/bail.t ........................ ok
+t/diagnostics.t ................. ok
+t/failure.t ..................... ok
+t/ok.t .......................... ok
+t/pipefail.t .................... ok
+t/plan.t ........................ skipped: (no reason given)
+t/script-success.t .............. ok
+t/skip-all.t .................... skipped: Because that was the intention.
+t/skip.t ........................ ok
+t/source-using-path-variable.t .. ok
+t/source-using-relative-path.t .. ok
+t/success.t ..................... ok
+t/todo.t ........................ ok
 All tests successful.
-Files=24, Tests=30,  0 wallclock secs ( 0.04 usr  0.01 sys +  0.17 cusr  0.04 csys =  0.26 CPU)
+Files=14, Tests=15,  0 wallclock secs ( 0.03 usr  0.01 sys +  0.08 cusr  0.02 csys =  0.14 CPU)
 Result: PASS
 ```
 

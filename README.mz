@@ -34,9 +34,13 @@ as examples on how to use bash tap.
 TAP tests are required to have a plan defined. Otherwise it is not considered
 a valid test run. Here is an example of a test run with 0 assertions.
 
+### Plan
+
 ```bash ./test plan.t
 plan 0
 ```
+
+### Ok
 
 The ok function simply prints out an TAP ok line.
 
@@ -49,12 +53,16 @@ Sometimes you don't know how many tests will be run. For those cases it is
 possible to have bash-tap append the plan to the TAP output after all
 assertions have been run.
 
+### Append Plan
+
 ```bash ./test append-plan.t
 ok "First ok."
 ok "Second ok."
 ok "Third ok."
 plan
 ```
+
+### Todo
 
 While maintaining the test suite it might be nice to define a todo so you don't
 forget to test a certain case.
@@ -63,6 +71,8 @@ forget to test a certain case.
 plan 1
 todo "A todo."
 ```
+
+## Not Ok
 
 The `not_ok` function simply prints out not ok TAP line.
 
@@ -79,6 +89,8 @@ a non zero code.
 echo $?
 ```
 
+### Success
+
 Because we are using bash and working with exit codes, it is nice to have a few
 helpers to make working with bash nicer.
 
@@ -87,10 +99,14 @@ plan 1
 true; success "Previous command had a zero exit code."
 ```
 
+### Failure
+
 ```bash ./test failure.t
 plan 1
 false; failure "Previous command had a non zero exit code."
 ```
+
+### Diagnostics
 
 Because the TAP output is written to stdout; we do not want to polute the
 stdout with the output of other programs. In case you are interested in the
@@ -103,6 +119,8 @@ echo 'some random output from a command' | diagnostics
 success "Previous command had a zero exit code."
 ```
 
+### Skip
+
 Skip is great to make sure that the planned test count is still what we expect
 yet it allows us to communicate that certain tests were not run.
 
@@ -111,6 +129,8 @@ plan 2
 skip "No need to test this."
 ok "Is run and is ok."
 ```
+
+## Skip all
 
 Certain cases we accept that a test does not continue but also doesn't cause
 a test failure. We use `skip_all` for those cases. Make sure to not have defined any
@@ -121,6 +141,8 @@ tests are run.
 ```bash ./test skip-all.t
 skip_all "Because that was the intention."
 ```
+
+### Bail
 
 Sometimes you want the complete test suite to fail when something happens.
 For that we use `bail`.
@@ -156,6 +178,8 @@ bash ./t/bail.bash
 echo $?
 ```
 
+### Failing pipelines
+
 When using pipes in bash, we have to make sure that if one of the processes in
 that pipeline fails, the whole pipeline also returns a non zero exit code. We
 use the `set -o pipefail` for that. bash-tap will do this for you when sourcing
@@ -166,6 +190,8 @@ plan 1
 ls | xargs not-a-command 2>&1 | diagnostics
 failure "Should fail because not-a-command is not an existant command."
 ```
+
+### Dash
 
 Besides bash you can also use bash-tap in dash. Dash does not have `source`
 feature and therefore we have to `cat` to perform the tests. We'll run all
