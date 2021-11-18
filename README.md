@@ -64,11 +64,11 @@ ok "Is ok."
 ok - Is ok.
 ```
 
+### Append Plan
+
 Sometimes you don't know how many tests will be run. For those cases it is
 possible to have bash-tap append the plan to the TAP output after all
 assertions have been run.
-
-### Append Plan
 
 ```bash ./test append-plan.t
 ok "First ok."
@@ -289,13 +289,14 @@ ok - Can run ./t/failure.t.
 ok - Can run ./t/ok.t.
 not ok - Can run ./t/pipefail.t.
 ok - Can run ./t/plan.t.
+ok - Can run ./t/script-success.t.
 ok - Can run ./t/skip-all.t.
 ok - Can run ./t/skip.t.
 ok - Can run ./t/source-using-path-variable.t.
 ok - Can run ./t/source-using-relative-path.t.
 ok - Can run ./t/success.t.
 ok - Can run ./t/todo.t.
-1..11
+1..12
 ```
 
 ### Script Success

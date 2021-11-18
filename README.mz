@@ -49,11 +49,11 @@ plan 1
 ok "Is ok."
 ```
 
+### Append Plan
+
 Sometimes you don't know how many tests will be run. For those cases it is
 possible to have bash-tap append the plan to the TAP output after all
 assertions have been run.
-
-### Append Plan
 
 ```bash ./test append-plan.t
 ok "First ok."
