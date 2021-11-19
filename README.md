@@ -97,7 +97,7 @@ todo "A todo."
 not ok - # TODO A todo.
 ```
 
-## Not Ok
+### Not Ok
 
 The `not_ok` function simply prints out not ok TAP line.
 
@@ -178,7 +178,7 @@ ok - # skip No need to test this.
 ok - Is run and is ok.
 ```
 
-## Skip all
+### Skip All
 
 Certain cases we accept that a test does not continue but also doesn't cause
 a test failure. We use `skip_all` for those cases. Make sure to not have defined any
@@ -355,7 +355,7 @@ t/source-using-relative-path.t .. ok
 t/success.t ..................... ok
 t/todo.t ........................ ok
 All tests successful.
-Files=14, Tests=15,  0 wallclock secs ( 0.03 usr  0.01 sys +  0.08 cusr  0.02 csys =  0.14 CPU)
+Files=14, Tests=15,  0 wallclock secs ( 0.03 usr  0.01 sys +  0.10 cusr  0.00 csys =  0.14 CPU)
 Result: PASS
 ```
 
